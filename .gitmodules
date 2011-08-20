@@ -1,0 +1,3 @@
+[submodule "vendor/python-shopify"]
+	path = vendor/python-shopify
+	url = https://github.com/lateshowlabs/python-shopify.git
