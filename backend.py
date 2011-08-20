@@ -10,7 +10,7 @@ import indexer
 
 session_manager = shopify_sessions.ShopifySessionManager(app.logger)
 product_indexer = indexer.ProductIndexer(app.logger)
-product_rex = indexer.ProductRex(app.logger)
+product_rex = indexer.ProductRex(app.logger, product_indexer)
 
 @app.route("/")
 def hello():
@@ -25,12 +25,12 @@ def callback():
 @app.route("/hitme")
 def hit_me():
     product, discount, shop_name = product_rex.hit_me()
-    price = float(product.variants[0].price)
+    price = product['price']
     discount_price = discount * price
     
     kwargs = {
         'shop_name' : shop_name,
-        'name' : product.title,
+        'name' : product['title'],
         'price' : "%.2f" % price,
         'discount_price' : "%.2f" % discount_price,
         'savings' : "%d" % int((1-discount)*100),
