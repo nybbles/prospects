@@ -40,5 +40,5 @@ def hit_me():
     return render_template('hit_me.html', **kwargs)
 
 if __name__ == "__main__":
-    app.debug = True
+    app.debug = False
     app.run()

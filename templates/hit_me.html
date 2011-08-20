@@ -1,20 +1,35 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html> <head>
+<link rel="stylesheet"
+href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.0.0.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <title>Prospecting..</title>
 </head>
 
 <body>
+<div class="container">
 <h2>{{ name }}, from {{ shop_name }}, usually ${{ price }}</h2>
 <h1>now for only <b><font color=red>${{ discount_price }}</font></b>!!!
 That's like, <b><font color=red>{{ savings }}%</font></b> off!</h1>
 
-<p>
-<a href="/buy">Buy this thing!</a>
-<br/>
-<a href="/hitme">On to the next random deal!</a>
-</p>
+<div class="well">
+<button id="buy" type="submit" class="btn large primary">
+  OMG! Buy this thing!
+</button>
+<button id="hitme" type="submit" class="btn large">
+  On to the next deal!
+</button>
+</div>
+</div>
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Sat Aug 20 14:21:30 PDT 2011 <!-- hhmts end -->
-</body> </html>
+<!-- hhmts start -->Last modified: Sat Aug 20 16:28:30 PDT 2011 <!-- hhmts end -->
+</body>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#hitme').click(function() {
+                      $(document).window.location = 'http://127.0.0.1:5000/hitme'; });
+});
+</script>
+</html>
