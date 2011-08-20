@@ -7,12 +7,9 @@ secret = u'e146abb4648f2c27d4d654738eded4bc'
 
 sessions = {}
 
-def create_shoppify_session(request):
+def create_shopify_session(request):
     request_dict = utils.make_dict_from_request_args(request.args)
     shop_url = request_dict['shop']
-    import ipdb
-    ipdb.set_trace()
-
 
     try:
         logging.info("Authenticating for %s" % shop_url)

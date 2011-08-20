@@ -13,7 +13,7 @@ def hello():
 
 @app.route("/callback")
 def callback():
-    shop_url, _ = shopify_sessions.create_shoppify_session(request)
+    shop_url, _ = shopify_sessions.create_shopify_session(request)
     return render_template('authenticated.html', shop_url=shop_url)
 
 if __name__ == "__main__":
