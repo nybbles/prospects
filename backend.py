@@ -11,6 +11,7 @@ import indexer
 session_manager = shopify_sessions.ShopifySessionManager(app.logger)
 product_indexer = indexer.ProductIndexer(app.logger)
 product_rex = indexer.ProductRex(app.logger, product_indexer)
+product_indexer.connect_rexer(product_rex)
 
 @app.route("/")
 def hello():

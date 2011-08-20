@@ -15,6 +15,8 @@ class ProductIndexer(object):
     shopifydb = None
     products = None
     shop_names = None
+
+    product_rexer = None
     
     def __init__(self, logger):
         self.logger = logger
@@ -22,6 +24,9 @@ class ProductIndexer(object):
         self.shopifydb = self.mongo_conn['shopify']
         self.products = self.shopifydb['products']
         self.shop_names = self.shopifydb['shop_names']
+
+    def connect_rexer(self, product_rexer):
+        self.product_rexer = product_rexer
 
     def add_shop_name(self, shop_id, shop_name):
         query = {'shop_id' : shop_id}
@@ -68,6 +73,7 @@ class ProductIndexer(object):
             self.logger.debug("indexing %s from store %s" %
                               (product.title, shop.name))
             self.add_product(shop.id, product)
+            self.product_rexer.add_product_id(shop.id, product.id)
 
 class ProductRex(object):
     logger = None
