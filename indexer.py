@@ -29,5 +29,7 @@ class ProductRex(object):
         self.logger = logger
 
     def hit_me(self):
-        product = shop_products[random.choice(shop_products.keys())]
-        return product
+        product, shop_id = shop_products[random.choice(shop_products.keys())]
+        discount = random.random()
+        
+        return product, discount, shop_name[shop_id]

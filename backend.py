@@ -24,9 +24,16 @@ def callback():
 
 @app.route("/hitme")
 def hit_me():
-    product = product_rex.hit_me()
+    product, discount, shop_name = product_rex.hit_me()
+    price = float(product.variants[0].price)
+    discount_price = discount * price
+    
     kwargs = {
-        'name' : product[0].title
+        'shop_name' : shop_name,
+        'name' : product.title,
+        'price' : "%.2f" % price,
+        'discount_price' : "%.2f" % discount_price,
+        'savings' : "%d" % int((1-discount)*100),
     }
     
     return render_template('hit_me.html', **kwargs)

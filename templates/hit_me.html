@@ -4,11 +4,17 @@
 </head>
 
 <body>
-<h2>Product name: {{ name }}<h2>
+<h2>{{ name }}, from {{ shop_name }}, usually ${{ price }}</h2>
+<h1>now for only <b><font color=red>${{ discount_price }}</font></b>!!!
+That's like, <b><font color=red>{{ savings }}%</font></b> off!</h1>
 
-Hit refresh to prospect a new product
+<p>
+<a href="/buy">Buy this thing!</a>
+<br/>
+<a href="/hitme">On to the next random deal!</a>
+</p>
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Sat Aug 20 13:54:22 PDT 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Sat Aug 20 14:21:30 PDT 2011 <!-- hhmts end -->
 </body> </html>
