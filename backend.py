@@ -5,7 +5,7 @@ import shopify_api as s
 from flask import Flask
 app = Flask(__name__)
 
-from flask import request
+from flask import request, render_template
 
 api_key = u'c90bd39bb9e9b66cf818046528b43e2e'
 secret = u'e146abb4648f2c27d4d654738eded4bc'
@@ -25,13 +25,15 @@ def callback():
 
     try:
         logging.info("Authenticating for %s" % shop_url)
+        shop = s.Session(api_key, shop_url, secret, params=request_dict)
         import ipdb
         ipdb.set_trace()
-        shop = s.Session(api_key, shop_url, secret, params=request_dict)
         logging.info("Authentication succeeded for %s" % shop_url)
     except s.AuthException as auth_e:
         logging.error("Authentication failed for %s" % shop_url)
         raise auth_e
+
+    return render_template('authenticated.html', shop_url=shop_url)
 
 if __name__ == "__main__":
     app.run()
