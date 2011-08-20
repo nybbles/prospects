@@ -1,27 +1,29 @@
-import logging
 import shopify_api as s
 import utils
 
-api_key = u'c90bd39bb9e9b66cf818046528b43e2e'
-secret = u'e146abb4648f2c27d4d654738eded4bc'
+class ShopifySessionManager(object):
+    api_key = u'c90bd39bb9e9b66cf818046528b43e2e'
+    secret = u'e146abb4648f2c27d4d654738eded4bc'
 
-sessions = {}
+    sessions = {}
+    logger = None
+    
+    def __init__(self, logger):
+        self.logger = logger
 
-def create_shopify_session(request):
-    request_dict = utils.make_dict_from_request_args(request.args)
-    shop_url = request_dict['shop']
+    def add_shopify_session(self, request):
+        request_dict = utils.make_dict_from_request_args(request.args)
+        shop_url = request_dict['shop']
 
-    try:
-        logging.info("Authenticating for %s" % shop_url)
-        shop_session = s.Session(api_key, shop_url, secret, params=request_dict)
-        logging.info("Authentication succeeded for %s" % shop_url)
+        if not shop_url in self.sessions:
+            try:
+                self.logger.debug("Authenticating for %s" % shop_url)
+                shop_session = s.Session(self.api_key, shop_url, self.secret,
+                                         params=request_dict)
+                self.logger.debug("Authentication succeeded for %s" % shop_url)
+                self.sessions[shop_url] = shop_session
+            except s.AuthException as auth_e:
+                self.logger.error("Authentication failed for %s" % shop_url)
+                raise auth_e
 
-        if shop_url in sessions:
-            raise Exception("Session already exists for %s" % shop_url)
-        else:
-            sessions[shop_url] = shop_session
-    except s.AuthException as auth_e:
-        logging.error("Authentication failed for %s" % shop_url)
-        raise auth_e
-
-    return shop_url, sessions[shop_url]
+        return shop_url, self.sessions[shop_url]
