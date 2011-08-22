@@ -7,6 +7,20 @@ href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.0.0.min.css">
 </head>
 
 <body>
+<div id="masthead">
+<div class="inner">
+<div class="container">
+  <br/>
+    <br/>  <br/>  <br/>
+<h1>Prospects</h1>
+<p>
+<h3>..the most incredibly exciting way to spend all of your time and money.</h3>
+</p>
+
+</div> <!-- /container -->
+</div>
+</div>
+    
 <div class="container">
 <h2>{{ name }}, from {{ shop_name }}, usually ${{ price }}</h2>
 <h1>now for only <b><font color=red>${{ discount_price }}</font></b>!!!
@@ -20,16 +34,29 @@ That's like, <b><font color=red>{{ savings }}%</font></b> off!</h1>
   On to the next deal!
 </button>
 </div>
+
+<p>
+ Do you like this deal? Yes? Then buy it! And then let us
+  recommend you another one! So you can buy that one too!
+  </br>
+  <font color="red">Don't</font> like this deal? Screw you cheapskate!</br>
+  (let us recommend you another one)
+</p>
+
 </div>
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Sat Aug 20 16:35:40 PDT 2011 <!-- hhmts end -->
+
 </body>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#hitme').click(function() {
-                      window.location = 'http://127.0.0.1:5000/hitme'; });
+        window.location = 'http://127.0.0.1:5000/hitme';
+    });
+    $('#buy').click(function() {
+        alert('It\'s yours!');
+    });
 });
 </script>
 </html>
